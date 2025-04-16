@@ -4,6 +4,7 @@ module.exports = {
 	  es6: true,
 	  jest: true,
 	},
+	ignorePatterns: ['README.md', '*main*.js'],
 	extends: [
 	  'airbnb-base',
 	  'plugin:jest/all',
@@ -18,6 +19,9 @@ module.exports = {
 	},
 	plugins: ['jest'],
 	rules: {
+		'import/extensions': ['error', 'ignorePackages', {
+			js: 'never'
+			}],
 	  'no-console': 'off',
 	  'no-shadow': 'off',
 	  'no-restricted-syntax': [
