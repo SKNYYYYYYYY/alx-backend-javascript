@@ -1,1 +1,7 @@
+.eslintrc.js
 node_modules/
+babel.config.js
+eslint.config.js
+eslintrc.cjs
+package.json
+package-lock.json
