@@ -56,7 +56,7 @@ const app = http.createServer((req, res) => {
       res.end(data.join('\n'));
     } catch (err) {
       res.statusCode = 404;
-      res.end('Cannot load the database');
+      res.end('This is the list of our students\nCannot load the database');
     }
   }
 }).listen(1245);
