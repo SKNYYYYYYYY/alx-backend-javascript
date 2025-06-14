@@ -1,7 +1,7 @@
 const app = require('http');
 
 app.createServer((request, response) => {
-  response.write('Hello Holberton School!');
+  response.write('Hello ALX!');
   response.end();
 }).listen(1245);
 
