@@ -1,26 +1,53 @@
-const keys = [ 'firstname', 'lastname', 'age', 'field' ]
-const values = [
-  [ 'Johann', 'Kerbrou', '30', 'CS' ],
-  [ 'Guillaume', 'Salou', '30', 'SWE' ],
-  [ 'Arielle', 'Salou', '20', 'CS' ],
-  [ 'Jonathan', 'Benou', '30', 'CS' ],
-  [ 'Emmanuel', 'Turlou', '40', 'CS' ],
-  [ 'Guillaume', 'Plessous', '35', 'CS' ],
-  [ 'Joseph', 'Crisou', '34', 'SWE' ],
-  [ 'Paul', 'Schneider', '60', 'SWE' ],
-  [ 'Tommy', 'Schoul', '32', 'SWE' ],
-  [ 'Katie', 'Shirou', '21', 'CS' ]
-]
+const { spawn } = require('node:child_process');
 
-// var fields = {}
-// for(let i = 0; i<values.length;  i++) {
-//     const field = values[i][3]
-//     fields[field] = (fields[field] || 0)+1
-// }
-var students = values.map(row => Object.fromEntries(keys.map((key, i) => [key, row[i]])))
-var fields = {}
-for (let i=0; i<students.length; i++){
-    const field = students[i]["field"]
-    fields[field] = (fields[field] || 0)+1
-}
-console.log(fields)
+const ls = spawn('ls');
+
+const fs = require('fs');
+
+let students;
+const countStudents = (filename) => {
+  ls.stdout.on('data', (data) => {
+    const files = data.toString().split('\n');
+    if (files.includes(filename)) {
+      try {
+        let stdout = fs.readFileSync(filename);
+        stdout = stdout.toString().split('\n').filter((line) => line.trim());
+        const keys = stdout[0].split(',');
+        const values = [];
+        for (let i = 1; i < stdout.length; i += 1) {
+          const details = stdout[i].split(',');
+          values.push(details);
+        }
+        students = values.map((row) => Object.fromEntries(keys.map((key, i) => [key, row[i]])));
+      } catch (err) {
+        console.log(err);
+      }
+
+      const totalStudents = students.length;
+      console.log(`Number of students: ${totalStudents}`);
+
+      const fields = {};
+      for (let i = 0; i < students.length; i += 1) {
+        const { field } = students[i];
+        fields[field] = (fields[field] || 0) + 1;
+      }
+
+      const fieldStudents = (field) => {
+        const list = [];
+        for (const student of students) {
+          if (student.field === field) {
+            list.push(student.firstname);
+          }
+        }
+        return list.join(', ');
+      };
+
+      for (const [key, value] of Object.entries(fields)) {
+        console.log(`Number of students in ${key}: ${value}. List: ${fieldStudents(key)}`);
+      }
+    } else {
+      throw new Error('Cannot load the database');
+    }
+  });
+};
+module.exports = countStudents;
