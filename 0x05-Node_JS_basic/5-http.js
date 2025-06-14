@@ -50,6 +50,7 @@ const app = http.createServer((req, res) => {
     const filename = process.argv[2];
     const data = students(filename);
     if (typeof (data) === 'string') {
+      res.statusCode = 404;
       res.end(data);
     }
     data.unshift('This is the list of our students');
