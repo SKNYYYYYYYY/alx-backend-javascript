@@ -1,6 +1,6 @@
-const app = require('http');
+const http = require('http');
 
-app.createServer((request, response) => {
+const app = http.createServer((request, response) => {
   response.statusCode = 200;
   response.end('Hello ALX!');
 }).listen(1245);
