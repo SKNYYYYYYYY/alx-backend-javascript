@@ -5,7 +5,7 @@ const ls = spawn('ls');
 const fs = require('fs');
 
 let students;
-function countStudents(filename) {
+const countStudents = (filename) => {
   ls.stdout.on('data', (data) => {
     const files = data.toString().split('\n');
     if (files.includes(filename)) {
@@ -50,5 +50,5 @@ function countStudents(filename) {
       throw new Error('Cannot load the database');
     }
   });
-}
+};
 module.exports = countStudents;
