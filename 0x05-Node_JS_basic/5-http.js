@@ -47,14 +47,17 @@ const app = http.createServer((req, res) => {
   if (req.url === '/') {
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
-    const filename = process.argv[2];
-    const data = students(filename);
-    if (typeof (data) === 'string') {
+    try {
+      const filename = process.argv[2];
+      const data = students(filename);
+      if (typeof (data) === 'object') {
+        data.unshift('This is the list of our students');
+      }
+      res.end(data.join('\n'));
+    } catch (err) {
       res.statusCode = 404;
-      res.end(data);
+      res.end('Cannot load the database');
     }
-    data.unshift('This is the list of our students');
-    res.end(data.join('\n'));
   }
 }).listen(1245);
 
