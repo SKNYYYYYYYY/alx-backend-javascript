@@ -1,8 +1,8 @@
 const app = require('http');
 
 app.createServer((request, response) => {
-  response.write('Hello ALX!');
-  response.end();
+  response.statusCode = 200;
+  response.end('Hello ALX!');
 }).listen(1245);
 
 module.exports = app;
