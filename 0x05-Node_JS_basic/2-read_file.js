@@ -31,8 +31,6 @@ const countStudents = (filename) => {
         const { field } = students[i];
         fields[field] = (fields[field] || 0) + 1;
       }
-      const csNum = fields.CS;
-      const sweNum = fields.SWE;
 
       const fieldStudents = (field) => {
         const list = [];
@@ -44,8 +42,9 @@ const countStudents = (filename) => {
         return list.join(', ');
       };
 
-      console.log(`Number of students in CS: ${csNum}. List: ${fieldStudents('CS')}`);
-      console.log(`Number of students in SWE: ${sweNum}. List: ${fieldStudents('SWE')}`);
+      for (const [key, value] of Object.entries(fields)) {
+        console.log(`Number of students in ${key}: ${value}. List: ${fieldStudents(key)}`);
+      }
     } else {
       throw new Error('Cannot load the database');
     }
