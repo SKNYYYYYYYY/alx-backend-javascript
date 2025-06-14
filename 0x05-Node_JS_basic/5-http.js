@@ -1,4 +1,3 @@
-const res = require('express/lib/response');
 const fs = require('fs');
 
 const http = require('http');
@@ -6,7 +5,8 @@ const http = require('http');
 let dbStudents;
 function students(filename) {
   if (!fs.existsSync(filename)) {
-    throw new Error('Cannot load the database');
+    return ('Cannot load the database');
+    // throw new Error('Cannot load the database');
   }
   const data = fs.readFileSync(filename, 'utf-8');
   const lines = data.split('\n').filter((line) => line.trim());
@@ -49,8 +49,10 @@ const app = http.createServer((req, res) => {
   } else if (req.url === '/students') {
     const filename = process.argv[2];
     const data = students(filename);
+    if (typeof (data) === 'string') {
+      res.end(data);
+    }
     data.unshift('This is the list of our students');
-    console.log(data.join('\n'));
     res.end(data.join('\n'));
   }
 }).listen(1245);
