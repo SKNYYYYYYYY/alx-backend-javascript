@@ -1,0 +1,5 @@
+{
+  "rules": {
+    "jest/prefer-expect-assertions": "off"
+  }
+}
