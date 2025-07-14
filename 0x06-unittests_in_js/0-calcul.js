@@ -4,4 +4,4 @@ function calculateNumber(a, b) {
   const num2 = Math.round(b);
   return num1 + num2;
 }
-module.exports = { calculateNumber };
+module.exports = calculateNumber;

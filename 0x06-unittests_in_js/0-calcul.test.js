@@ -1,7 +1,7 @@
 /* eslint-disable jest/expect-expect */
 // 0-calcul.test.js
 const assert = require('assert');
-const { calculateNumber } = require('./0-calcul');
+const calculateNumber = require('./0-calcul');
 
 describe('calculateNumber', function () {
   it('should return 4 when passed 1 and 3', function () {
