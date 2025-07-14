@@ -1,0 +1,17 @@
+{
+  "name": "unittest",
+  "version": "1.0.0",
+  "main": "0-calcul.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "mocha": "^11.7.1"
+  }
+}
