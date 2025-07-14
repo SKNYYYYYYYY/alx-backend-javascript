@@ -12,4 +12,7 @@ describe('calculateNumber', function() {
   it('should return 2 when type is DIVIDE', function () {
     assert.strictEqual(calculateNumber("DIVIDE", 4,2), 2)
   })
+  it('should return Error when type is DIVIDE and rounded b is 0', function () {
+    assert.strictEqual(calculateNumber("DIVIDE", 4,0), "Error")
+  })
 })
