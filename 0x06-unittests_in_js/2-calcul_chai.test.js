@@ -2,7 +2,7 @@
 const { describe } = require('mocha');
 
 const chai = require('chai');
-const calculateNumber = require('./1-calcul');
+const calculateNumber = require('./2-calcul_chai');
 
 const { expect } = chai;
 
