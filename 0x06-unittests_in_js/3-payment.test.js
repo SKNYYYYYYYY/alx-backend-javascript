@@ -14,8 +14,8 @@ describe('sendPaymentRequestToApi', () => {
     const b = 2;
 
     sendPaymentRequestToApi(a, b)
-    expect(utilsSpy.calledOnce).to.be.true;
-    expect(utilsSpy.calledWith(type, a, b)).to.be.true;
+    sinon.assert.calledOnce(utilsSpy);
+    sinon.assert.calledWith(utilsSpy, type, a, b);
 
     utilsSpy.restore();
   });
